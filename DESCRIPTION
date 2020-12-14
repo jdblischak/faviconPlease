@@ -1,0 +1,15 @@
+Package: faviconPlease
+Title: Find URL for a website's favicon
+Version: 0.0.0.9000
+Authors@R:
+    person(given = "John",
+           family = "Blischak",
+           role = c("aut", "cre"),
+           email = "jdblischak@gmail.com")
+Description: Finds the URL to the favicon for a website. This is useful if you
+  want to display a website's favicon in an HTML document or web application.
+Imports: utils, xml2
+Suggests: tools
+License: MIT + file LICENSE
+Encoding: UTF-8
+RoxygenNote: 7.1.1
