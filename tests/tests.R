@@ -68,6 +68,19 @@ stopifnot(
   )
 )
 
+stopifnot(
+  identical(
+    faviconIco("https", "www.phosphosite.org", ""),
+    "https://www.phosphosite.org/favicon.ico"
+  )
+)
+
+stopifnot(
+  identical(
+    faviconPlease("https://www.phosphosite.org/"),
+    "https://www.phosphosite.org/favicon.ico"
+  )
+)
 
 # faviconDuckDuckGo ------------------------------------------------------------
 
