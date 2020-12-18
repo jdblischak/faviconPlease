@@ -7,8 +7,16 @@ faviconPlease <- function(
   fallback = faviconDuckDuckGo
 ) {
 
+  if (!is.character(links)) {
+    stop("The argument `links` must be a character vector of URLs")
+  }
+
   if (!validFunctions(functions)) {
     stop("The argument `functions` must be a list of functions or NULL")
+  }
+
+  if (!validFallback(fallback)) {
+    stop("The argument `fallback` must be a function with one argument or a single character string")
   }
 
   linksParsed <- xml2::url_parse(links)
@@ -34,9 +42,9 @@ faviconPlease <- function(
 
 #' @export
 faviconLink <- function(scheme, server, path) {
-  siteURL <- sprintf("%s://%s", scheme, server, path)
+  siteURL <- sprintf("%s://%s/%s", scheme, server, path)
   xml <- xml2::read_html(siteURL)
-  xpath <- "/html/head/link[@rel = 'iconz' or @rel = 'shortcut icon']"
+  xpath <- "/html/head/link[@rel = 'icon' or @rel = 'shortcut icon']"
   linkElement <- xml2::xml_find_first(xml, xpath)
   href <- xml2::xml_attr(linkElement, "href")
   if (is.na(href)) return("")
@@ -53,7 +61,7 @@ faviconLink <- function(scheme, server, path) {
 }
 
 #' @export
-faviconIco <- function(scheme, server) {
+faviconIco <- function(scheme, server, path) {
   favicon <- sprintf("%s://%s/favicon.ico", scheme, server)
   response <- tryCatch(
     suppressWarnings(
@@ -106,8 +114,20 @@ validFunctions <- function(functions) {
 
   if (!is.list(functions)) return(FALSE)
 
-  eachIsFunction <- lapply(functions, is.function)
+  eachIsFunction <- vapply(functions, is.function, logical(1))
   if (!all(eachIsFunction)) return(FALSE)
 
   return(TRUE)
+}
+
+validFallback <- function(fallback) {
+  if (is.character(fallback) && length(fallback) == 1) {
+    return(TRUE)
+  }
+
+  if (is.function(fallback) && length(formals(fallback)) == 1) {
+    return(TRUE)
+  }
+
+  return(FALSE)
 }

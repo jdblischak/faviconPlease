@@ -2,9 +2,72 @@ library("faviconPlease")
 library("tools")
 utils::sessionInfo()
 
+checkInternet <- function(site = "www.r-project.org") {
+  .Platform$OS.type == "unix" && !is.null(suppressWarnings(utils::nsl(site)))
+}
+hasInternet <- checkInternet()
+
 # Errors -----------------------------------------------------------------------
 
-assertError(faviconPlease("www.r-project.org", functions = 1))
+# Invalid links
+assertError(faviconPlease(1))
+
+# Invalid functions
+assertError(faviconPlease("https://www.r-project.org", functions = 1))
+
+# Invalid fallback
+assertError(faviconPlease("https://www.r-project.org/", fallback = 1))
+assertError(faviconPlease("https://www.r-project.org/", fallback = c("a", "b")))
+assertError(faviconPlease("https://www.r-project.org/", fallback = function(x, y) 1))
+
+# faviconLink ------------------------------------------------------------------
+
+# Example of absolute link with rel="icon"
+stopifnot(
+  identical(
+    faviconLink("https", "stephenslab.github.io", "/wflow-divvy/"),
+    "https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png"
+  )
+)
+
+stopifnot(
+  identical(
+    faviconPlease("https://stephenslab.github.io/wflow-divvy/"),
+    "https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png"
+  )
+)
+
+# Example of root-relative link with rel="shortcut icon"
+stopifnot(
+  identical(
+    faviconLink("https", "reactome.org", "/content/detail/R-HSA-983712"),
+    "https://reactome.org/templates/favourite/favicon.ico"
+  )
+)
+
+stopifnot(
+  identical(
+    faviconPlease("https://reactome.org/content/detail/R-HSA-983712"),
+    "https://reactome.org/templates/favourite/favicon.ico"
+  )
+)
+
+# faviconIco -------------------------------------------------------------------
+
+stopifnot(
+  identical(
+    faviconIco("https", "www.genome.jp", "/kegg-bin/show_pathway?map00410"),
+    "https://www.genome.jp/favicon.ico"
+  )
+)
+
+stopifnot(
+  identical(
+    faviconPlease("https://www.genome.jp/kegg-bin/show_pathway?map00410"),
+    "https://www.genome.jp/favicon.ico"
+  )
+)
+
 
 # faviconDuckDuckGo ------------------------------------------------------------
 
