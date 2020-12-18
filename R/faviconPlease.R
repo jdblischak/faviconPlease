@@ -55,7 +55,7 @@ faviconLink <- function(scheme, server, path) {
   } else if (startsWith(href, "/")) { # root-relative
     favicon <- sprintf("%s://%s%s", scheme, server, href)
   } else { # relative
-    favicon <- sprintf("%s://%s/%s/href", scheme, server, path, href)
+    favicon <- sprintf("%s://%s/%s/%s", scheme, server, path, href)
   }
   return(favicon)
 }
