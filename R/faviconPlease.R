@@ -54,6 +54,14 @@ faviconLink <- function(scheme, server, path) {
   href <- xml2::xml_attr(linkElement, "href")
   if (is.na(href)) return("")
 
+  # Check for HTML element `base` to modify relative links
+  # https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+  baseElement <- xml2::xml_find_first(xml, "/html/head/base")
+  baseLink <- xml2::xml_attr(baseElement, "href")
+  if (!is.na(baseLink)) {
+    href <- paste0(baseLink, href)
+  }
+
   # The link in href could be absolute, root-relative, or relative
   if (startsWith(href, "http")) { # absolute
     favicon <- href
