@@ -7,7 +7,7 @@
 faviconDuckDuckGo(server)
 }
 \arguments{
-\item{server}{}
+\item{server}{The name of the server, e.g. "www.r-project.org"}
 }
 \value{
 Character vector

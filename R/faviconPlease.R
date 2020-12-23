@@ -1,5 +1,13 @@
 #' Find the URL to a website's favicon
 #'
+#'
+#' @param links Character vector of URLs
+#' @param functions List of functions for finding URL to a website's favicon.
+#'   They are tried in order until a URL is found. If no URL is found, the
+#'   fallback is applied.
+#' @param fallback Either a function or a single character vector. It is
+#'   applied when none of the supplied functions are able to find a favicon.
+#'
 #' @export
 faviconPlease <- function(
   links,
@@ -45,6 +53,13 @@ faviconPlease <- function(
   return(favicons)
 }
 
+#' Search for a link element that specifies the location of the favicon
+#'
+#' @param scheme "http" or "https"
+#' @param server The name of the server, e.g. "www.r-project.org"
+#' @param path The path to a target file on the server (must start with a
+#'   forward slash)
+#'
 #' @export
 faviconLink <- function(scheme, server, path) {
   siteURL <- sprintf("%s://%s%s", scheme, server, path)
@@ -77,6 +92,10 @@ faviconLink <- function(scheme, server, path) {
   return(favicon)
 }
 
+#' Check for the existence of favicon.ico
+#'
+#' @inheritParams faviconLink
+#'
 #' @export
 faviconIco <- function(scheme, server, path) {
   favicon <- sprintf("%s://%s/favicon.ico", scheme, server)
@@ -101,7 +120,7 @@ faviconIco <- function(scheme, server, path) {
 #' as a fallback function if the favicon can't be found directly via the
 #' standard methods.
 #'
-#' @param server
+#' @inheritParams faviconLink
 #'
 #' @return Character vector
 #'
@@ -119,6 +138,15 @@ faviconDuckDuckGo <- function(server) {
   return(favicon)
 }
 
+#' Use Google's favicon service
+#'
+#' @inheritParams faviconLink
+#'
+#' @return Character vector
+#'
+#' @examples
+#'   faviconGoogle("reactome.org")
+#'
 #' @export
 faviconGoogle <- function(server) {
   iconService <- "https://www.google.com/s2/favicons?domain_url=%s"

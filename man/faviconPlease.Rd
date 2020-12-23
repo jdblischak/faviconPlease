@@ -10,6 +10,16 @@ faviconPlease(
   fallback = faviconDuckDuckGo
 )
 }
+\arguments{
+\item{links}{Character vector of URLs}
+
+\item{functions}{List of functions for finding URL to a website's favicon.
+They are tried in order until a URL is found. If no URL is found, the
+fallback is applied.}
+
+\item{fallback}{Either a function or a single character vector. It is
+applied when none of the supplied functions are able to find a favicon.}
+}
 \description{
 Find the URL to a website's favicon
 }

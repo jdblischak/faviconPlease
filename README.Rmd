@@ -6,9 +6,9 @@ output: github_document
 
 # faviconPlease
 
-Finds the URL to the favicon for a website. This is useful if you want to
-display a website's favicon in an HTML document or web application, especially
-if the website is behind a firewall.
+```{r description, results='asis', echo=FALSE}
+cat(read.dcf("DESCRIPTION", fields = "Description"))
+```
 
 ```{r}
 library(faviconPlease)
