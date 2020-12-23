@@ -60,7 +60,11 @@ faviconLink <- function(scheme, server, path) {
   } else if (startsWith(href, "/")) { # root-relative
     favicon <- sprintf("%s://%s%s", scheme, server, href)
   } else { # relative
-    favicon <- sprintf("%s://%s/%s/%s", scheme, server, path, href)
+    # This is experimental. I need a good test case to improve it. Fortunately
+    # this is quite rare.
+    warning("Support for relative URLs to icons is experimental. Please open an Issue if this fails.")
+    pathRelative <- file.path(dirname(path), href)
+    favicon <- sprintf("%s://%s/%s", scheme, server, pathRelative)
   }
   return(favicon)
 }
