@@ -6,6 +6,7 @@ checkInternet <- function(site = "www.r-project.org") {
   .Platform$OS.type == "unix" && !is.null(suppressWarnings(utils::nsl(site)))
 }
 hasInternet <- checkInternet()
+if (!hasInternet) message("No internet connection")
 
 # Errors -----------------------------------------------------------------------
 
@@ -22,65 +23,69 @@ assertError(faviconPlease("https://www.r-project.org/", fallback = function(x, y
 
 # faviconLink ------------------------------------------------------------------
 
-# Example of absolute link with rel="icon"
-stopifnot(
-  identical(
-    faviconLink("https", "stephenslab.github.io", "/wflow-divvy/"),
-    "https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png"
+if (hasInternet) {
+  # Example of absolute link with rel="icon"
+  stopifnot(
+    identical(
+      faviconLink("https", "stephenslab.github.io", "/wflow-divvy/"),
+      "https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png"
+    )
   )
-)
 
-stopifnot(
-  identical(
-    faviconPlease("https://stephenslab.github.io/wflow-divvy/"),
-    "https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png"
+  stopifnot(
+    identical(
+      faviconPlease("https://stephenslab.github.io/wflow-divvy/"),
+      "https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png"
+    )
   )
-)
 
-# Example of root-relative link with rel="shortcut icon"
-stopifnot(
-  identical(
-    faviconLink("https", "reactome.org", "/content/detail/R-HSA-983712"),
-    "https://reactome.org/templates/favourite/favicon.ico"
+  # Example of root-relative link with rel="shortcut icon"
+  stopifnot(
+    identical(
+      faviconLink("https", "reactome.org", "/content/detail/R-HSA-983712"),
+      "https://reactome.org/templates/favourite/favicon.ico"
+    )
   )
-)
 
-stopifnot(
-  identical(
-    faviconPlease("https://reactome.org/content/detail/R-HSA-983712"),
-    "https://reactome.org/templates/favourite/favicon.ico"
+  stopifnot(
+    identical(
+      faviconPlease("https://reactome.org/content/detail/R-HSA-983712"),
+      "https://reactome.org/templates/favourite/favicon.ico"
+    )
   )
-)
+}
 
 # faviconIco -------------------------------------------------------------------
 
-stopifnot(
-  identical(
-    faviconIco("https", "www.genome.jp", "/kegg-bin/show_pathway?map00410"),
-    "https://www.genome.jp/favicon.ico"
+if (hasInternet) {
+  stopifnot(
+    identical(
+      faviconIco("https", "www.genome.jp", "/kegg-bin/show_pathway?map00410"),
+      "https://www.genome.jp/favicon.ico"
+    )
   )
-)
 
-stopifnot(
-  identical(
-    faviconPlease("https://www.genome.jp/kegg-bin/show_pathway?map00410"),
-    "https://www.genome.jp/favicon.ico"
+  stopifnot(
+    identical(
+      faviconPlease("https://www.genome.jp/kegg-bin/show_pathway?map00410"),
+      "https://www.genome.jp/favicon.ico"
+    )
   )
-)
 
-stopifnot(
-  identical(
-    faviconIco("https", "www.phosphosite.org", ""),
-    "https://www.phosphosite.org/favicon.ico"
+  stopifnot(
+    identical(
+      faviconIco("https", "www.phosphosite.org", ""),
+      "https://www.phosphosite.org/favicon.ico"
+    )
   )
-)
 
-stopifnot(
-  identical(
-    faviconPlease("https://www.phosphosite.org/"),
-    "https://www.phosphosite.org/favicon.ico"
+  stopifnot(
+    identical(
+      faviconPlease("https://www.phosphosite.org/"),
+      "https://www.phosphosite.org/favicon.ico"
+    )
   )
-)
+}
 
 # faviconDuckDuckGo ------------------------------------------------------------
 
