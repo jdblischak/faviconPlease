@@ -21,14 +21,17 @@ faviconPlease <- function(
 
   linksParsed <- xml2::url_parse(links)
   favicons <- character(length = length(links))
+
   for (i in seq_along(links)) {
     scheme <- linksParsed[i, "scheme"]
     server <- linksParsed[i, "server"]
     path <- linksParsed[i, "path"]
+
     for (favFunc in functions) {
       favicons[i] <- favFunc(scheme, server, path)
       if (favicons[i] != "") break
     }
+
     if (favicons[i] == "") {
       if (is.function(fallback)) {
         favicons[i] <- fallback(server)
@@ -36,13 +39,15 @@ faviconPlease <- function(
         favicons[i] <- fallback
       }
     }
+
   }
+
   return(favicons)
 }
 
 #' @export
 faviconLink <- function(scheme, server, path) {
-  siteURL <- sprintf("%s://%s/%s", scheme, server, path)
+  siteURL <- sprintf("%s://%s%s", scheme, server, path)
   xml <- xml2::read_html(siteURL)
   xpath <- "/html/head/link[@rel = 'icon' or @rel = 'shortcut icon']"
   linkElement <- xml2::xml_find_first(xml, xpath)
