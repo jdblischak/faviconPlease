@@ -6,6 +6,8 @@ output: github_document
 
 # faviconPlease
 
+[![R-CMD-check](https://github.com/jdblischak/faviconPlease/workflows/R-CMD-check/badge.svg)](https://github.com/jdblischak/faviconPlease/actions)
+
 ```{r description, results='asis', echo=FALSE}
 cat(read.dcf("DESCRIPTION", fields = "Description"))
 ```
