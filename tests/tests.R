@@ -60,7 +60,7 @@ if (hasInternet) {
 if (hasInternet) {
   stopifnot(
     identical(
-      faviconIco("https", "www.genome.jp", "/kegg-bin/show_pathway?map00410"),
+      faviconIco("https", "www.genome.jp", "/kegg-bin/show_pathway"),
       "https://www.genome.jp/favicon.ico"
     )
   )
@@ -137,6 +137,20 @@ if (hasInternet) {
       "https://ensembl.org/i/ensembl-favicon.png"
     )
   )
+
+  # So far I could only get the favicon.ico with utils::download.file() with
+  # `wget --no-check-certificate`
+  if (Sys.which("wget") != "") {
+    stopifnot(
+      identical(
+        faviconIco("https", "ensembl.org", "/Homo_sapiens/Gene/Summary",
+                   method = "wget", extra = "--no-check-certificate"),
+        "https://ensembl.org/favicon.ico"
+      )
+    )
+  } else {
+    message("wget is not available")
+  }
 
   stopifnot(
     identical(
