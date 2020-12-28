@@ -98,13 +98,24 @@ faviconLink <- function(scheme, server, path) {
 #' Check for the existence of favicon.ico
 #'
 #' @inheritParams faviconLink
+#' @inheritParams utils::download.file
 #'
 #' @export
-faviconIco <- function(scheme, server, path) {
+faviconIco <- function(
+  scheme,
+  server,
+  path,
+  method = getOption("download.file.method", default = "auto")
+) {
   favicon <- sprintf("%s://%s/favicon.ico", scheme, server)
   response <- tryCatch(
     suppressWarnings(
-      utils::download.file(favicon, destfile = nullfile(), quiet = TRUE)
+      utils::download.file(
+        url = favicon,
+        destfile = nullfile(),
+        method = method,
+        quiet = TRUE
+      )
     ),
     error = function(e) return(1)
   )

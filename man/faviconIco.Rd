@@ -4,7 +4,12 @@
 \alias{faviconIco}
 \title{Check for the existence of favicon.ico}
 \usage{
-faviconIco(scheme, server, path)
+faviconIco(
+  scheme,
+  server,
+  path,
+  method = getOption("download.file.method", default = "auto")
+)
 }
 \arguments{
 \item{scheme}{"http" or "https"}
@@ -13,6 +18,15 @@ faviconIco(scheme, server, path)
 
 \item{path}{The path to a target file on the server (must start with a
 forward slash)}
+
+\item{method}{Method to be used for downloading files.  Current
+    download methods are \code{"internal"}, \code{"wininet"} (Windows
+    only) \code{"libcurl"}, \code{"wget"} and \code{"curl"}, and there
+    is a value \code{"auto"}: see \sQuote{Details} and \sQuote{Note}.
+
+    The method can also be set through the option
+    \code{"download.file.method"}: see \code{\link{options}()}.
+  }
 }
 \description{
 Check for the existence of favicon.ico
