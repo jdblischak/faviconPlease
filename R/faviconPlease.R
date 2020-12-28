@@ -36,7 +36,10 @@ faviconPlease <- function(
     path <- linksParsed[i, "path"]
 
     for (favFunc in functions) {
-      favicons[i] <- favFunc(scheme, server, path)
+      favicons[i] <- tryCatch(
+        favFunc(scheme, server, path),
+        error = function(e) return("")
+      )
       if (favicons[i] != "") break
     }
 
