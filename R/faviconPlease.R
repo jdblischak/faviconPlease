@@ -105,7 +105,9 @@ faviconIco <- function(
   scheme,
   server,
   path,
-  method = getOption("download.file.method", default = "auto")
+  method = getOption("download.file.method", default = "auto"),
+  extra = getOption("download.file.extra"),
+  headers = NULL
 ) {
   favicon <- sprintf("%s://%s/favicon.ico", scheme, server)
   response <- tryCatch(
@@ -114,7 +116,9 @@ faviconIco <- function(
         url = favicon,
         destfile = nullfile(),
         method = method,
-        quiet = TRUE
+        quiet = TRUE,
+        extra = extra,
+        headers = headers
       )
     ),
     error = function(e) return(1)

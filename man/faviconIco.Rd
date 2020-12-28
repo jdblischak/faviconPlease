@@ -8,7 +8,9 @@ faviconIco(
   scheme,
   server,
   path,
-  method = getOption("download.file.method", default = "auto")
+  method = getOption("download.file.method", default = "auto"),
+  extra = getOption("download.file.extra"),
+  headers = NULL
 )
 }
 \arguments{
@@ -27,6 +29,14 @@ forward slash)}
     The method can also be set through the option
     \code{"download.file.method"}: see \code{\link{options}()}.
   }
+
+\item{extra}{character vector of additional command-line arguments for
+    the \code{"wget"} and \code{"curl"} methods.}
+
+\item{headers}{named character vector of HTTP headers to use in HTTP
+    requests.  It is ignored for non-HTTP URLs.  The \code{User-Agent}
+    header, coming from the \code{HTTPUserAgent} option (see
+    \code{\link{options}}) is used as the first header, automatically.}
 }
 \description{
 Check for the existence of favicon.ico
