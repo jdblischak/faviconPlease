@@ -65,8 +65,8 @@ faviconPlease <- function(
 #'
 #' @export
 faviconLink <- function(scheme, server, path) {
-  siteURL <- sprintf("%s://%s%s", scheme, server, path)
-  xml <- xml2::read_html(siteURL)
+  siteUrl <- sprintf("%s://%s%s", scheme, server, path)
+  xml <- readHtml(siteUrl)
   xpath <- "/html/head/link[@rel = 'icon' or @rel = 'shortcut icon']"
   linkElement <- xml2::xml_find_first(xml, xpath)
   href <- xml2::xml_attr(linkElement, "href")
@@ -93,6 +93,29 @@ faviconLink <- function(scheme, server, path) {
     favicon <- sprintf("%s://%s/%s", scheme, server, pathRelative)
   }
   return(favicon)
+}
+
+readHtml <- function(theUrl) {
+  # If it works right away, exit early with the result
+  xml <- try(xml2::read_html(theUrl), silent = TRUE)
+  if (!inherits(xml, "try-error")) {
+    return(xml)
+  }
+
+  # If the suggested package httr is installed, try downloading the file without
+  # authenticating the SSL certificate
+  if (requireNamespace("httr", quietly = TRUE)) {
+    theUrlDownloaded <- httr::RETRY(
+      verb = "GET",
+      url = theUrl,
+      config = httr::config(ssl_verifypeer = 0L)
+    )
+    return(xml2::read_html(theUrlDownloaded))
+  }
+
+  # If neither xml2 nor httr can download the file, return an empty HTML template
+  htmlForFailure <- "<html><head></head><body>Unable to download file</body></html>"
+  return(xml2::read_html(htmlForFailure))
 }
 
 #' Check for the existence of favicon.ico

@@ -118,3 +118,30 @@ stopifnot(
     "https://www.google.com/s2/favicons?domain_url=address.domain"
   )
 )
+
+# Ensembl ----------------------------------------------------------------------
+
+# ensembl.org is interesting for multiple reasons:
+#   * It can't be read with xml2::read_html() b/c its SSL certificate is
+#     invalid. I assume this has to do with how it redirects to
+#     https://useast.ensembl.org. By default method="libcurl",
+#     getOption("download.file.method"), uses -L to folow redirects, so I don't
+#     know what the exact problem is.
+#   * It has a rel="icon" link in addition to /favicon.ico, and it points to a
+#     a different path: /i/ensembl-favicon.png
+#   * The links in its head element are duplicated
+if (hasInternet) {
+  stopifnot(
+    identical(
+      faviconLink("https", "ensembl.org", "/Homo_sapiens/Gene/Summary"),
+      "https://ensembl.org/i/ensembl-favicon.png"
+    )
+  )
+
+  stopifnot(
+    identical(
+      faviconPlease("https://ensembl.org/Homo_sapiens/Gene/Summary?g="),
+      "https://ensembl.org/i/ensembl-favicon.png"
+    )
+  )
+}
