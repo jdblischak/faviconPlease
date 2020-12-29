@@ -96,11 +96,14 @@ faviconLink <- function(scheme, server, path) {
 }
 
 readHtml <- function(theUrl) {
+  theUrlConnection <- url(theUrl)
+
   # If it works right away, exit early with the result
-  xml <- try(xml2::read_html(theUrl), silent = TRUE)
+  xml <- try(xml2::read_html(theUrlConnection), silent = TRUE)
   if (!inherits(xml, "try-error")) {
     return(xml)
   }
+  close(theUrlConnection)
 
   # If the suggested package httr is installed, try downloading the file without
   # authenticating the SSL certificate
