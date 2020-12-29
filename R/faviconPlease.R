@@ -108,7 +108,10 @@ readHtml <- function(theUrl) {
     theUrlDownloaded <- httr::RETRY(
       verb = "GET",
       url = theUrl,
-      config = httr::config(ssl_verifypeer = 0L)
+      config = httr::config(
+        ssl_verifypeer = 0L,
+        ssl_cipher_list = "DEFAULT@SECLEVEL=1"
+      )
     )
     return(xml2::read_html(theUrlDownloaded))
   }
