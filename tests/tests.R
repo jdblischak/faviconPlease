@@ -141,13 +141,29 @@ if (hasInternet) {
   # So far I could only get the favicon.ico with utils::download.file() with
   # `wget --no-check-certificate`
   if (Sys.which("wget") != "") {
-    stopifnot(
-      identical(
-        faviconIco("https", "ensembl.org", "/Homo_sapiens/Gene/Summary",
-                   method = "wget", extra = "--no-check-certificate"),
-        "https://ensembl.org/favicon.ico"
+    os <- utils::osVersion
+    # Ubuntu 20.04 (focal) requires extra security settings, but the argument
+    # --ciphers isn't available for the version of wget on Ubuntu 18.04
+    # (bionic).
+    # https://stackoverflow.com/a/62359497
+    if (startsWith(os, "Ubuntu 20")) {
+      stopifnot(
+        identical(
+          faviconIco("https", "ensembl.org", "/Homo_sapiens/Gene/Summary",
+                     method = "wget", extra = c("--no-check-certificate",
+                                                "--ciphers=DEFAULT:@SECLEVEL=1")),
+          "https://ensembl.org/favicon.ico"
+        )
       )
-    )
+    } else {
+      stopifnot(
+        identical(
+          faviconIco("https", "ensembl.org", "/Homo_sapiens/Gene/Summary",
+                     method = "wget", extra = "--no-check-certificate"),
+          "https://ensembl.org/favicon.ico"
+        )
+      )
+    }
   } else {
     message("wget is not available")
   }
