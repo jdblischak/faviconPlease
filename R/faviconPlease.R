@@ -114,7 +114,8 @@ readHtml <- function(theUrl) {
       config = httr::config(
         ssl_verifypeer = 0L,
         ssl_cipher_list = "DEFAULT@SECLEVEL=1"
-      )
+      ),
+      quiet = TRUE
     )
     return(xml2::read_html(theUrlDownloaded))
   }
