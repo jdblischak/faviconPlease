@@ -65,7 +65,13 @@ faviconPlease <- function(
 #'
 #' @export
 faviconLink <- function(scheme, server, path) {
-  xml <- readHtml(scheme, server, path)
+  siteUrl <- sprintf("%s://%s%s", scheme, server, path)
+  xml <- readHtml(siteUrl)
+  # If that returned an empty result, try the base URL
+  if (xml2::xml_length(xml) == 0) {
+    siteUrlBase <- sprintf("%s://%s", scheme, server)
+    xml <- readHtml(siteUrlBase)
+  }
   xpath <- "/html/head/link[@rel = 'icon' or @rel = 'shortcut icon']"
   linkElement <- xml2::xml_find_first(xml, xpath)
   href <- xml2::xml_attr(linkElement, "href")
@@ -94,8 +100,7 @@ faviconLink <- function(scheme, server, path) {
   return(favicon)
 }
 
-readHtml <- function(scheme, server, path) {
-  theUrl <- sprintf("%s://%s%s", scheme, server, path)
+readHtml <- function(theUrl) {
   theUrlConnection <- url(theUrl)
 
   # If it works right away, exit early with the result
@@ -122,18 +127,8 @@ readHtml <- function(scheme, server, path) {
     }
   }
 
-  # Try the base URL
-  theUrlBase <- sprintf("%s://%s", scheme, server)
-  theUrlBaseConnection <- url(theUrlBase)
-  xmlBase <- try(xml2::read_html(theUrlBaseConnection), silent = TRUE)
-  if (!inherits(xmlBase, "try-error")) {
-    return(xmlBase)
-  }
-  close(theUrlBaseConnection)
-
-  # If neither xml2 nor httr can download the file, return an empty HTML template
-  htmlForFailure <- "<html><head></head><body>Unable to download file</body></html>"
-  return(xml2::read_html(htmlForFailure))
+  # If neither xml2 nor httr can download the file, return an empty XML doc
+  return(xml2::xml_new_root("empty"))
 }
 
 #' Check for the existence of favicon.ico
