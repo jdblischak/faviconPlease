@@ -9,10 +9,14 @@ Authors@R:
 Description: Finds the URL to the favicon for a website. This is useful if you
   want to display a website's favicon in an HTML document or web application,
   especially if the website is behind a firewall.
-Imports: utils, xml2
+Imports:
+  utils,
+  xml2
 Suggests:
   httr,
-  tools
+  tinytest,
+  tools,
+  ttdo
 License: MIT + file LICENSE
 Encoding: UTF-8
 RoxygenNote: 7.1.1
