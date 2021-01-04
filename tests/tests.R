@@ -175,3 +175,24 @@ if (hasInternet) {
     )
   )
 }
+
+# amigo.geneontology.org -------------------------------------------------------
+
+# Example of a partial URL that gives a 404. Solved by reading the HTML for the
+# base URL.
+
+if (hasInternet) {
+  stopifnot(
+    identical(
+      faviconLink("http", "amigo.geneontology.org", "/amigo/term/"),
+      "http://amigo.geneontology.org/static/images/go-logo-favicon.ico"
+    )
+  )
+
+  stopifnot(
+    identical(
+      faviconPlease("http://amigo.geneontology.org/amigo/term/"),
+      "http://amigo.geneontology.org/static/images/go-logo-favicon.ico"
+    )
+  )
+}
