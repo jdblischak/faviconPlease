@@ -15,7 +15,6 @@ Imports:
 Suggests:
   httr,
   tinytest,
-  tools,
   ttdo
 License: MIT + file LICENSE
 Encoding: UTF-8
