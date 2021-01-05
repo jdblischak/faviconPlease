@@ -32,9 +32,4 @@ if (at_home()) {
                "/CCDS/CcdsBrowse.cgi?REQUEST=CCDS&ORGANISM=9606&BUILDS=CURRENTBUILDS&DATA="),
     "https://www.ncbi.nlm.nih.gov/favicon.ico"
   )
-
-  expect_identical_xl(
-    faviconIco("https", "www.uniprot.org", "/uniprot/"),
-    "https://www.uniprot.org/favicon.ico"
-  )
 }

@@ -48,3 +48,46 @@ if (at_home()) {
     "https://ensembl.org/i/ensembl-favicon.png"
   )
 }
+
+# uniprot.org is also owned by EBI, so it suffers from the same complications
+# caused by Ubuntu 20's increased security settings.
+# https://github.com/Ensembl/ensembl-rest/issues/427#issuecomment-629268281
+
+if (at_home()) {
+  # <link type="image/vnd.microsoft.icon" href="/favicon.ico" rel="shortcut icon"/>
+  expect_identical_xl(
+    faviconLink("https", "www.uniprot.org", "/uniprot/"),
+    "https://www.uniprot.org/favicon.ico"
+  )
+
+  # So far I could only get the favicon.ico with utils::download.file() with
+  # `wget --no-check-certificate`
+  if (Sys.which("wget") != "") {
+    os <- utils::osVersion
+    # Ubuntu 20.04 (focal) requires extra security settings, but the argument
+    # --ciphers isn't available for the version of wget on Ubuntu 18.04
+    # (bionic).
+    # https://stackoverflow.com/a/62359497
+    if (startsWith(os, "Ubuntu 20")) {
+      expect_identical_xl(
+        faviconIco("https", "www.uniprot.org", "/uniprot/",
+                   method = "wget", extra = c("--no-check-certificate",
+                                              "--ciphers=DEFAULT:@SECLEVEL=1")),
+        "https://www.uniprot.org/favicon.ico"
+      )
+    } else {
+      expect_identical_xl(
+        faviconIco("https", "www.uniprot.org", "/uniprot/",
+                   method = "wget", extra = "--no-check-certificate"),
+        "https://www.uniprot.org/favicon.ico"
+      )
+    }
+  } else {
+    message("wget is not available")
+  }
+
+  expect_identical_xl(
+    faviconPlease("https://www.uniprot.org/uniprot/"),
+    "https://www.uniprot.org/favicon.ico"
+  )
+}
