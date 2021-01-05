@@ -64,4 +64,27 @@ if (at_home()) {
     faviconPlease("https://www.gsea-msigdb.org/gsea/msigdb/cards/"),
     "https://www.gsea-msigdb.org/gsea/images/icon_32x32.png"
   )
+
+  # Example of multiple rel="icon" (multiple sizes). The first one is always
+  # returned. The link is site-relative.
+  expect_identical(
+    faviconLink("https", "www.r-project.org", "/"),
+    "https://www.r-project.org/favicon-32x32.png"
+  )
+
+  expect_identical(
+    faviconPlease("https://www.r-project.org/"),
+    "https://www.r-project.org/favicon-32x32.png"
+  )
+
+  # Example of rel="icon" with absolute link
+  expect_identical(
+    faviconLink("https", "github.com", "/jdblischak/faviconPlease"),
+    "https://github.githubassets.com/favicons/favicon.svg"
+  )
+
+  expect_identical(
+    faviconPlease("https://github.com/jdblischak/faviconPlease"),
+    "https://github.githubassets.com/favicons/favicon.svg"
+  )
 }
