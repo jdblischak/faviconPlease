@@ -68,6 +68,8 @@ faviconLink <- function(scheme, server, path) {
   if (scheme == "file") { # primarily for testing purposes
     if (.Platform$OS.type == "windows") {
       filepath <- sub("^/", "", path)
+    } else {
+      filepath <- path
     }
     xml <- xml2::read_html(filepath)
   } else {
