@@ -53,4 +53,15 @@ if (at_home()) {
     faviconPlease("http://www.ncbi.nlm.nih.gov/gene/"),
     "http://www.ncbi.nlm.nih.gov/favicon.ico"
   )
+
+  # Example with <base>
+  expect_identical(
+    faviconLink("https", "www.gsea-msigdb.org", "/gsea/msigdb/cards/"),
+    "https://www.gsea-msigdb.org/gsea/images/icon_32x32.png"
+  )
+
+  expect_identical(
+    faviconPlease("https://www.gsea-msigdb.org/gsea/msigdb/cards/"),
+    "https://www.gsea-msigdb.org/gsea/images/icon_32x32.png"
+  )
 }
