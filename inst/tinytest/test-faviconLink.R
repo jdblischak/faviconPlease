@@ -35,4 +35,22 @@ if (at_home()) {
     faviconPlease("http://amigo.geneontology.org/amigo/term/"),
     "http://amigo.geneontology.org/static/images/go-logo-favicon.ico"
   )
+
+  # Example of a protocol-relative URL
+  # https://en.wikipedia.org/wiki/URL#prurl
+  # https://stackoverflow.com/a/9646435
+  expect_identical_xl(
+    faviconLink("https", "www.ncbi.nlm.nih.gov", "/gene/"),
+    "https://www.ncbi.nlm.nih.gov/favicon.ico"
+  )
+
+  expect_identical_xl(
+    faviconPlease("https://www.ncbi.nlm.nih.gov/gene/"),
+    "https://www.ncbi.nlm.nih.gov/favicon.ico"
+  )
+
+  expect_identical_xl(
+    faviconPlease("http://www.ncbi.nlm.nih.gov/gene/"),
+    "http://www.ncbi.nlm.nih.gov/favicon.ico"
+  )
 }

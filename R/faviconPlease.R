@@ -85,9 +85,12 @@ faviconLink <- function(scheme, server, path) {
     href <- paste0(baseLink, href)
   }
 
-  # The link in href could be absolute, root-relative, or relative
+  # The link in href could be absolute, protocol-relative, root-relative, or
+  # relative
   if (startsWith(href, "http")) { # absolute
     favicon <- href
+  } else if (startsWith(href, "//")) { # protocol-relative
+    favicon <- sprintf("%s:%s", scheme, href)
   } else if (startsWith(href, "/")) { # root-relative
     favicon <- sprintf("%s://%s%s", scheme, server, href)
   } else { # relative
