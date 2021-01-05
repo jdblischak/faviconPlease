@@ -2,7 +2,12 @@ source("tinytest-settings.R")
 using("ttdo")
 
 useFileProtocol <- function(filepath) {
-  paste0("file://", normalizePath(filepath))
+  if (.Platform$OS.type == "windows") {
+    prefix <- "file:///"
+  } else {
+    prefix <- "file://"
+  }
+  paste0(prefix, normalizePath(filepath, winslash = "/"))
 }
 
 fileNoLink <- useFileProtocol("testFiles/no-link.html")

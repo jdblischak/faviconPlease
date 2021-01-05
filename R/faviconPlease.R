@@ -66,7 +66,10 @@ faviconPlease <- function(
 #' @export
 faviconLink <- function(scheme, server, path) {
   if (scheme == "file") { # primarily for testing purposes
-    xml <- xml2::read_html(path)
+    if (.Platform$OS.type == "windows") {
+      filepath <- sub("^/", "", path)
+    }
+    xml <- xml2::read_html(filepath)
   } else {
     siteUrl <- sprintf("%s://%s%s", scheme, server, path)
     xml <- readHtml(siteUrl)
