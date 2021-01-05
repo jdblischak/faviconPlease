@@ -65,12 +65,16 @@ faviconPlease <- function(
 #'
 #' @export
 faviconLink <- function(scheme, server, path) {
-  siteUrl <- sprintf("%s://%s%s", scheme, server, path)
-  xml <- readHtml(siteUrl)
-  # If that returned an empty result, try the base URL
-  if (xml2::xml_length(xml) == 0) {
-    siteUrlBase <- sprintf("%s://%s", scheme, server)
-    xml <- readHtml(siteUrlBase)
+  if (scheme == "file") { # primarily for testing purposes
+    xml <- xml2::read_html(path)
+  } else {
+    siteUrl <- sprintf("%s://%s%s", scheme, server, path)
+    xml <- readHtml(siteUrl)
+    # If that returned an empty result, try the base URL
+    if (xml2::xml_length(xml) == 0) {
+      siteUrlBase <- sprintf("%s://%s", scheme, server)
+      xml <- readHtml(siteUrlBase)
+    }
   }
   xpath <- "/html/head/link[@rel = 'icon' or @rel = 'shortcut icon']"
   linkElement <- xml2::xml_find_first(xml, xpath)
@@ -98,7 +102,7 @@ faviconLink <- function(scheme, server, path) {
     # this is quite rare.
     warning("Support for relative URLs to icons is experimental. Please open an Issue if this fails.")
     pathRelative <- file.path(dirname(path), href)
-    favicon <- sprintf("%s://%s/%s", scheme, server, pathRelative)
+    favicon <- sprintf("%s://%s%s", scheme, server, pathRelative)
   }
   return(favicon)
 }

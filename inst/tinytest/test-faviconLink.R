@@ -1,6 +1,63 @@
 source("tinytest-settings.R")
 using("ttdo")
 
+useFileProtocol <- function(filepath) {
+  paste0("file://", normalizePath(filepath))
+}
+
+fileNoLink <- useFileProtocol("testFiles/no-link.html")
+
+expect_identical_xl(
+  faviconPlease(fileNoLink, functions = list(faviconLink), fallback = ""),
+  "",
+  info = "No link"
+)
+
+fileAbsolute <- useFileProtocol("testFiles/absolute.html")
+
+expect_identical_xl(
+  faviconPlease(fileAbsolute, functions = list(faviconLink), fallback = ""),
+  "https://absolute.com/custom.png",
+  info = "Absolute link"
+)
+
+fileProtocolRelative <- useFileProtocol("testFiles/protocol-relative.html")
+
+expect_identical_xl(
+  faviconPlease(fileProtocolRelative, functions = list(faviconLink), fallback = ""),
+  "file://protocol-relative.com/custom.png",
+  info = "Protocol-relative link"
+)
+
+fileRootRelative <- useFileProtocol("testFiles/root-relative.html")
+
+expect_identical_xl(
+  faviconPlease(fileRootRelative, functions = list(faviconLink), fallback = ""),
+  "file:///root-relative/custom.png",
+  info = "Root-relative link"
+)
+
+fileRootRelativeWithBase <- useFileProtocol("testFiles/root-relative-with-base.html")
+
+expect_identical_xl(
+  faviconPlease(fileRootRelativeWithBase, functions = list(faviconLink), fallback = ""),
+  "file:///root-relative/custom.png",
+  info = "Root-relative link with base"
+)
+
+fileRelative <- useFileProtocol("testFiles/relative.html")
+iconRelativeExpected <- file.path(dirname(fileRelative), "custom.png")
+
+expect_identical_xl(
+  suppressWarnings(
+    faviconPlease(fileRelative, functions = list(faviconLink), fallback = "")
+  ),
+  iconRelativeExpected,
+  info = "Relative link"
+)
+
+# Examples ---------------------------------------------------------------------
+
 if (at_home()) {
   # Example of absolute link with rel="icon"
   expect_identical_xl(
