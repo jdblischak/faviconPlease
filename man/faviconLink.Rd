@@ -14,6 +14,13 @@ faviconLink(scheme, server, path)
 \item{path}{The path to a target file on the server (must start with a
 forward slash)}
 }
+\value{
+URL to favicon or \code{""}.
+}
 \description{
 Search for a link element that specifies the location of the favicon
+}
+\seealso{
+\code{\link{faviconPlease}},
+         \code{\link{faviconIco}}
 }

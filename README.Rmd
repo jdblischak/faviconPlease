@@ -58,6 +58,146 @@ https://icons.duckduckgo.com/ip3/abc.ico
 
 ## Extending faviconPlease
 
+The default strategy above is designed to reliably get you a favicon URL for
+most websites. However, you can customize it as needed.
+
+### Change the fallback to use Google's favicon service
+
+The default fallback function is `faviconDuckDuckGo()`. To instead use Google's
+favicon service, e.g. https://www.google.com/s2/favicons?domain_url=ensembl.org,
+you can set the argument `fallback = faviconGoogle`.
+
+```{css echo=FALSE}
+/*
+  Make the example favicons inserted below all the same height. Purposefully
+  used 20px since that is the height of the Actions badge above, which is also
+  affected by this rule.
+*/
+img {
+  height: 20px;
+}
+```
+
+Note that neither DuckDuckGo nor Google have every favicon you might expect.
+Some examples:
+
+* DuckDuckGo has the favicon for GitHub but not Google
+    * https://icons.duckduckgo.com/ip3/github.com.ico
+    ![GitHub's favicon from DuckDuckGo](https://icons.duckduckgo.com/ip3/github.com.ico)
+    * https://www.google.com/s2/favicons?domain_url=github.com
+    ![GitHub's favicon from Google](https://www.google.com/s2/favicons?domain_url=github.com)
+* Google has the favicon for [AmiGO][amigo] but not DuckDuckGo
+    * https://icons.duckduckgo.com/ip3/amigo.geneontology.org.ico
+    ![AmiGO's favicon from DuckDuckGo](https://icons.duckduckgo.com/ip3/amigo.geneontology.org.ico)
+    * https://www.google.com/s2/favicons?domain_url=amigo.geneontology.org
+    ![AmiGO's favicon from Google](https://www.google.com/s2/favicons?domain_url=amigo.geneontology.org)
+
+[amigo]: http://amigo.geneontology.org/
+
+Fortunately they both provide a generic favicon to insert when they don't have
+the favicon.
+
+### Use a custom fallback function
+
+You can use your own custom fallback function instead. It must accept one
+argument, which is the server, e.g. `"github.com"`. The easiest approach would
+be to copy-paste one of the existing fallback functions and modify it to use
+your alternative favicon service.
+
+```{r custom-fallback}
+faviconDuckDuckGo
+```
+
+### Use a custom fallback favicon
+
+If you have a URL to a generic favicon file that you would like to use as a
+fallback, you can directly pass this as a character vector. It could also be a
+path to an image file on the server where your app is running.
+
+### Change the order of the favicon functions
+
+The default strategy first checks the `<head>` for a link to the favicon file
+and then checks for the availability of the file `favicon.ico`. You can change
+this order, or only perform one of them, by changing the argument `functions`
+passed to `faviconPlease()`. It should be a list of functions.
+
+```{r order, eval=FALSE}
+# default
+functions = list(faviconLink, faviconIco)
+# Switch the order
+functions = list(faviconIco, faviconLink)
+# Only search <head>
+functions = list(faviconLink)
+# Only check for favicon.ico
+functions = list(faviconIco)
+# Skip the favicon functions entirely and just use the fallback
+functions = NULL
+```
+
+### Use a custom favicon function
+
+You can also create your own custom favicon function to pass to
+`faviconPlease()`. By default it must accept 3 arguments. It will be passed the
+URL's scheme (e.g. `"https"`), server (e.g. `"github.com"`), and path (e.g.
+`"/jdblischak/faviconPlease"`). Your function should return the URL to a favicon
+or an empty string, `""`, if it can't find one.
+
+```{r faviconLink-signature}
+# Favicon functions must accept at least 3 positional arguments
+args(faviconLink)
+```
+
+As a concrete example, here is a custom function for searching for `favicon.ico`
+on Ubuntu 20.04, which has increased security settings (see troubleshooting
+section below).
+
+```{r faviconIcoUbuntu20}
+faviconIcoUbuntu20 <- function(scheme, server, path) {
+  faviconIco(scheme, server, path, method = "wget",
+             extra = c("--no-check-certificate",
+                       "--ciphers=DEFAULT:@SECLEVEL=1"))
+}
+```
+
+It calls `faviconIco()` with the specific settings needed by `download.file()`
+to work on Ubuntu 20.04. You could then use your custom function instead of the
+default `faviconIco()` by calling `faviconPlease()` with `functions =
+list(faviconLink, faviconIcoUbuntu20)`.
+
+Note that the example function `faviconIcoUbuntu20()` will likely fail on
+Windows, macOS, and Ubuntu versions prior to 20.04.
 
 ## Troubleshooting
 
+Unfortunately it's not easy to make this fool proof for all operating systems
+and all websites. Here are some known issues:
+
+1. `download.file()`, used by `faviconIco()`, is known to have cross-platform
+issues. Thus the official documentation in `?download.file` recommends:
+
+    > Setting the `method` should be left to the end user.
+
+    Accordingly, `faviconIco()` exposes the arguments `method`, `extra`, and
+    `headers`, which are passed directly to `download.file()`. Alternatively you
+    can set the global options `"download.file.method"` or
+    `"download.file.extra"`.
+
+1. Ubuntu 20.04 increased its default security settings for downloading files
+from the internet ([details][openssl-ticket]). Unfortunately many websites have not updated their SSL
+certificates to comply with the increased security restrictions. `faviconLink()`
+has a workaround for this situation, but not `faviconIco()`. As an example,
+here's how you could detect the availability of https://ensembl.org/favicon.ico
+on Ubuntu 20.
+
+    ```{r ubuntu20, eval=FALSE}
+    faviconIco("https", "ensembl.org", "",
+               method = "wget", extra = c("--no-check-certificate",
+                                              "--ciphers=DEFAULT:@SECLEVEL=1"))
+    ```
+
+    Alternatively, if it's an option for you, you could avoid this workaround by
+    using the previous Ubuntu LTS release 18.04. Also note that the above
+    command will fail on Ubuntu 18.04 because the default `wget` installed
+    doesn't have the argument `--ciphers`.
+
+    [openssl-ticket]: https://bugs.launchpad.net/ubuntu/+source/openssl/+bug/1864689

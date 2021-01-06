@@ -19,3 +19,7 @@ Use Google's favicon service
   faviconGoogle("reactome.org")
 
 }
+\seealso{
+\code{\link{faviconPlease}},
+         \code{\link{faviconDuckDuckGo}}
+}

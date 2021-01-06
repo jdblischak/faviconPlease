@@ -26,4 +26,7 @@ standard methods.
 \references{
 \href{https://help.duckduckgo.com/duckduckgo-help-pages/features/favicons/}{DuckDuckGo favicons},
   \href{https://help.duckduckgo.com/duckduckgo-help-pages/privacy/favicons/}{DuckDuckGo favicons privacy}
+
+#' @seealso \code{\link{faviconPlease}},
+         \code{\link{faviconGoogle}}
 }

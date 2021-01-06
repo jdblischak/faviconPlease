@@ -1,5 +1,8 @@
 #' Find the URL to a website's favicon
 #'
+#' \code{faviconPlease()} first applies the favicon functions specified in the
+#' argument \code{functions}. If these do not find a favicon URL, then it
+#' applies the fallback function specified by the argument \code{fallback}.
 #'
 #' @param links Character vector of URLs
 #' @param functions List of functions for finding URL to a website's favicon.
@@ -7,6 +10,11 @@
 #'   fallback is applied.
 #' @param fallback Either a function or a single character vector. It is
 #'   applied when none of the supplied functions are able to find a favicon.
+#'
+#' @seealso \code{\link{faviconLink}},
+#'          \code{\link{faviconIco}},
+#'          \code{\link{faviconDuckDuckGo}},
+#'          \code{\link{faviconGoogle}}
 #'
 #' @export
 faviconPlease <- function(
@@ -62,6 +70,11 @@ faviconPlease <- function(
 #' @param server The name of the server, e.g. "www.r-project.org"
 #' @param path The path to a target file on the server (must start with a
 #'   forward slash)
+#'
+#' @return URL to favicon or \code{""}.
+#'
+#' @seealso \code{\link{faviconPlease}},
+#'          \code{\link{faviconIco}}
 #'
 #' @export
 faviconLink <- function(scheme, server, path) {
@@ -148,6 +161,11 @@ readHtml <- function(theUrl) {
 #' @inheritParams faviconLink
 #' @inheritParams utils::download.file
 #'
+#' @return URL to \code{favicon.ico} or \code{""}.
+#'
+#' @seealso \code{\link{faviconPlease}},
+#'          \code{\link{faviconLink}}
+#'
 #' @export
 faviconIco <- function(
   scheme,
@@ -197,6 +215,9 @@ faviconIco <- function(
 #'   \href{https://help.duckduckgo.com/duckduckgo-help-pages/features/favicons/}{DuckDuckGo favicons},
 #'   \href{https://help.duckduckgo.com/duckduckgo-help-pages/privacy/favicons/}{DuckDuckGo favicons privacy}
 #'
+#'#' @seealso \code{\link{faviconPlease}},
+#'          \code{\link{faviconGoogle}}
+#'
 #' @export
 faviconDuckDuckGo <- function(server) {
   iconService <- "https://icons.duckduckgo.com/ip3/%s.ico"
@@ -212,6 +233,9 @@ faviconDuckDuckGo <- function(server) {
 #'
 #' @examples
 #'   faviconGoogle("reactome.org")
+#'
+#' @seealso \code{\link{faviconPlease}},
+#'          \code{\link{faviconDuckDuckGo}}
 #'
 #' @export
 faviconGoogle <- function(server) {

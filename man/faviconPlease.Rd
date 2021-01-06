@@ -21,5 +21,13 @@ fallback is applied.}
 applied when none of the supplied functions are able to find a favicon.}
 }
 \description{
-Find the URL to a website's favicon
+\code{faviconPlease()} first applies the favicon functions specified in the
+argument \code{functions}. If these do not find a favicon URL, then it
+applies the fallback function specified by the argument \code{fallback}.
+}
+\seealso{
+\code{\link{faviconLink}},
+         \code{\link{faviconIco}},
+         \code{\link{faviconDuckDuckGo}},
+         \code{\link{faviconGoogle}}
 }

@@ -38,6 +38,13 @@ forward slash)}
     header, coming from the \code{HTTPUserAgent} option (see
     \code{\link{options}}) is used as the first header, automatically.}
 }
+\value{
+URL to \code{favicon.ico} or \code{""}.
+}
 \description{
 Check for the existence of favicon.ico
+}
+\seealso{
+\code{\link{faviconPlease}},
+         \code{\link{faviconLink}}
 }
