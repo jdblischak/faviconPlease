@@ -54,8 +54,10 @@ returns it.
     provided by the search engine [DuckDuckGo](https://duckduckgo.com/),
     e.g. <https://icons.duckduckgo.com/ip3/github.com.ico>. This
     provides a nice default for websites that don’t have a favicon (or
-    can’t be easily found), e.g.
-    <https://icons.duckduckgo.com/ip3/abc.ico>
+    can’t be easily found). You can view the generic favicon by
+    replacing `github.com` in the previous URL with an invalid domain (I
+    can’t provide an example because CRAN flags invalid URLs when
+    checking a package).
 
 ## Extending faviconPlease
 
@@ -66,8 +68,8 @@ for most websites. However, you can customize it as needed.
 
 The default fallback function is `faviconDuckDuckGo()`. To instead use
 Google’s favicon service,
-e.g. <https://www.google.com/s2/favicons?domain_url=ensembl.org>, you
-can set the argument `fallback = faviconGoogle`.
+e.g. <https://www.google.com/s2/favicons?domain_url=www.ensembl.org>,
+you can set the argument `fallback = faviconGoogle`.
 
 <style type="text/css">
 /*
@@ -92,12 +94,11 @@ expect. Some examples:
         Google](https://www.google.com/s2/favicons?domain_url=github.com)
   - Google has the favicon for [AmiGO](http://amigo.geneontology.org/)
     but not DuckDuckGo
-      - <https://icons.duckduckgo.com/ip3/amigo.geneontology.org.ico>
-        ![AmiGO’s favicon from
-        DuckDuckGo](https://icons.duckduckgo.com/ip3/amigo.geneontology.org.ico)
       - <https://www.google.com/s2/favicons?domain_url=amigo.geneontology.org>
         ![AmiGO’s favicon from
-        Google](https://www.google.com/s2/favicons?domain_url=amigo.geneontology.org)
+        Google](https://www.google.com/s2/favicons?domain_url=geneontology.org)
+      - I can’t display the generic favicon returned by DuckDuckGo,
+        again because of CRAN’s URL checks.
 
 Fortunately they both provide a generic favicon to insert when they
 don’t have the favicon.
@@ -214,11 +215,11 @@ systems and all websites. Here are some known issues:
     Unfortunately many websites have not updated their SSL certificates
     to comply with the increased security restrictions. `faviconLink()`
     has a workaround for this situation, but not `faviconIco()`. As an
-    example, here’s how you could detect the availability of
-    <https://ensembl.org/favicon.ico> on Ubuntu 20.
+    example, here’s how you could detect the availability of favicon.ico
+    for the Ensembl website on Ubuntu 20.
     
     ``` r
-    faviconIco("https", "ensembl.org", "",
+    faviconIco("https", "www.ensembl.org", "",
                method = "wget", extra = c("--no-check-certificate",
                                               "--ciphers=DEFAULT:@SECLEVEL=1"))
     ```

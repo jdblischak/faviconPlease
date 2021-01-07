@@ -26,17 +26,32 @@ if (at_home()) {
     # (bionic).
     # https://stackoverflow.com/a/62359497
     if (startsWith(os, "Ubuntu 20")) {
+      # apex domain
       expect_identical_xl(
         faviconIco("https", "ensembl.org", "/Homo_sapiens/Gene/Summary",
                    method = "wget", extra = c("--no-check-certificate",
                                               "--ciphers=DEFAULT:@SECLEVEL=1")),
         "https://ensembl.org/favicon.ico"
       )
+      # www subdomain
+      expect_identical_xl(
+        faviconIco("https", "www.ensembl.org", "/Homo_sapiens/Gene/Summary",
+                   method = "wget", extra = c("--no-check-certificate",
+                                              "--ciphers=DEFAULT:@SECLEVEL=1")),
+        "https://www.ensembl.org/favicon.ico"
+      )
     } else {
+      # apex domain
       expect_identical_xl(
         faviconIco("https", "ensembl.org", "/Homo_sapiens/Gene/Summary",
                    method = "wget", extra = "--no-check-certificate"),
         "https://ensembl.org/favicon.ico"
+      )
+      # www subdomain
+      expect_identical_xl(
+        faviconIco("https", "www.ensembl.org", "/Homo_sapiens/Gene/Summary",
+                   method = "wget", extra = "--no-check-certificate"),
+        "https://www.ensembl.org/favicon.ico"
       )
     }
   } else {

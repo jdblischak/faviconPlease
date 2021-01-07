@@ -19,17 +19,3 @@
 Maintainer: 'John Blischak <jdblischak@gmail.com>'
 
 New submission
-
-  URL: https://ensembl.org/favicon.ico (moved to https://www.ensembl.org/favicon.ico)
-    From: README.md
-    Status: 200
-    Message: OK
-Found the following (possibly) invalid URLs:
-  URL: https://icons.duckduckgo.com/ip3/abc.ico
-    Status: 404
-    From: README.md
-    Message: Not Found
-  URL: https://icons.duckduckgo.com/ip3/amigo.geneontology.org.ico
-    From: README.md
-    Status: 404
-    Message: Not Found
