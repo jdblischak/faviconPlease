@@ -5,8 +5,8 @@
 
 [![R-CMD-check](https://github.com/jdblischak/faviconPlease/workflows/R-CMD-check/badge.svg)](https://github.com/jdblischak/faviconPlease/actions)
 
-Finds the URL to the favicon for a website. This is useful if you want
-to display a website’s favicon in an HTML document or web application,
+Finds the URL to the ‘favicon’ for a website. This is useful if you want
+to display the ‘favicon’ in an HTML document or web application,
 especially if the website is behind a firewall.
 
 ``` r
@@ -110,16 +110,21 @@ approach would be to copy-paste one of the existing fallback functions
 and modify it to use your alternative favicon service.
 
 ``` r
-faviconDuckDuckGo
+args(faviconDuckDuckGo)
 ```
 
-    ## function(server) {
-    ##   iconService <- "https://icons.duckduckgo.com/ip3/%s.ico"
-    ##   favicon <- sprintf(iconService, server)
-    ##   return(favicon)
+    ## function (server) 
+    ## NULL
+
+``` r
+body(faviconDuckDuckGo)
+```
+
+    ## {
+    ##     iconService <- "https://icons.duckduckgo.com/ip3/%s.ico"
+    ##     favicon <- sprintf(iconService, server)
+    ##     return(favicon)
     ## }
-    ## <bytecode: 0x7fffec9cb4f0>
-    ## <environment: namespace:faviconPlease>
 
 ### Use a custom fallback favicon
 

@@ -105,7 +105,8 @@ be to copy-paste one of the existing fallback functions and modify it to use
 your alternative favicon service.
 
 ```{r custom-fallback}
-faviconDuckDuckGo
+args(faviconDuckDuckGo)
+body(faviconDuckDuckGo)
 ```
 
 ### Use a custom fallback favicon
