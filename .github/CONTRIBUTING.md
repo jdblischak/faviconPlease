@@ -63,19 +63,19 @@ urlchecker::url_check()
 
 1. Check package with R-hub
 
-    i. Validate email (once per machine)
+    1) Validate email (once per machine)
 
         ```
         rhub::validate_email()
         ```
 
-    i. Check on with R-release on Solaris
+    1) Check on with R-release on Solaris
 
         ```
         rhub::check_for_cran(platform = "solaris-x86-patched")
         ```
 
-    i. Check on with R-devel on Windows
+    1) Check on with R-devel on Windows
 
         ```
         rhub::check_for_cran(platform = "windows-x86_64-devel")

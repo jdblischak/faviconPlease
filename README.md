@@ -71,32 +71,28 @@ Google’s favicon service,
 e.g. <https://www.google.com/s2/favicons?domain_url=www.ensembl.org>,
 you can set the argument `fallback = faviconGoogle`.
 
-<style type="text/css">
-/*
-  Make the example favicons inserted below all the same height. Purposefully
-  used 20px since that is the height of the Actions badge above, which is also
-  affected by this rule.
-*/
-img {
-  height: 20px;
-}
-</style>
-
 Note that neither DuckDuckGo nor Google have every favicon you might
 expect. Some examples:
 
   - DuckDuckGo has the favicon for GitHub but not Google
-      - <https://icons.duckduckgo.com/ip3/github.com.ico> ![GitHub’s
-        favicon from
-        DuckDuckGo](https://icons.duckduckgo.com/ip3/github.com.ico)
-      - <https://www.google.com/s2/favicons?domain_url=github.com>
-        ![GitHub’s favicon from
-        Google](https://www.google.com/s2/favicons?domain_url=github.com)
+      - <https://icons.duckduckgo.com/ip3/github.com.ico> <img
+        src="https://icons.duckduckgo.com/ip3/github.com.ico"
+        alt="GitHub's favicon from DuckDuckGo"
+        height="20px"
+          />
+      - <https://www.google.com/s2/favicons?domain_url=github.com> <img
+        src="https://www.google.com/s2/favicons?domain_url=github.com"
+        alt="GitHub's favicon from Google"
+        height="20px"
+          />
   - Google has the favicon for [AmiGO](http://amigo.geneontology.org/)
     but not DuckDuckGo
       - <https://www.google.com/s2/favicons?domain_url=amigo.geneontology.org>
-        ![AmiGO’s favicon from
-        Google](https://www.google.com/s2/favicons?domain_url=geneontology.org)
+        <img
+        src="https://www.google.com/s2/favicons?domain_url=geneontology.org"
+        alt="AmiGO's favicon from Google"
+        height="20px"
+          />
       - I can’t display the generic favicon returned by DuckDuckGo,
         again because of CRAN’s URL checks.
 
