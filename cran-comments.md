@@ -1,3 +1,9 @@
+## Resubmission
+
+This is a resubmission. In this version I have:
+
+* Documented the return value for all exported functions
+
 ## Test environments
 
 * win-builder (devel)
