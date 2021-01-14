@@ -127,6 +127,17 @@ if (at_home()) {
     "https://www.gsea-msigdb.org/gsea/images/icon_32x32.png"
   )
 
+  # Another example with <base>
+  expect_identical(
+    faviconLink("https", "www.targetvalidation.org", "/target/"),
+    "https://www.targetvalidation.org/imgs/favicons/OT_favicon.png"
+  )
+
+  expect_identical(
+    faviconPlease("https://www.targetvalidation.org/target/"),
+    "https://www.targetvalidation.org/imgs/favicons/OT_favicon.png"
+  )
+
   # Example of multiple rel="icon" (multiple sizes). The first one is always
   # returned. The link is site-relative.
   expect_identical(
