@@ -1,3 +1,6 @@
+### Development version (GitHub)
+
+
 ### 0.1.1
 
 * Document return value for `faviconPlease()`

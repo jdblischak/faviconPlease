@@ -1,9 +1,3 @@
-## Resubmission
-
-This is a resubmission. In this version I have:
-
-* Documented the return value for all exported functions
-
 ## Test environments
 
 * win-builder (devel)
@@ -20,9 +14,4 @@ This is a resubmission. In this version I have:
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
-
-* checking CRAN incoming feasibility ... NOTE
-Maintainer: 'John Blischak <jdblischak@gmail.com>'
-
-New submission
+0 errors | 0 warnings | 0 notes

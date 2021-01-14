@@ -20,7 +20,15 @@ faviconPlease("https://github.com/")
 
 ## Installation
 
-```{r installation, eval=FALSE}
+Install latest release from CRAN:
+
+```{r installation-cran, eval=FALSE}
+install.packages("faviconPlease")
+```
+
+Install development version from GitHub:
+
+```{r installation-github, eval=FALSE}
 install.packages("remotes")
 remotes::install_github("jdblischak/faviconPlease")
 ```
