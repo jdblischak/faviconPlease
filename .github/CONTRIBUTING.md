@@ -69,13 +69,20 @@ urlchecker::url_check()
         rhub::validate_email()
         ```
 
-    1) Check on with R-release on Solaris
+    1) Check with R-release on Solaris
 
         ```
         rhub::check_for_cran(platform = "solaris-x86-patched")
         ```
 
-    1) Check on with R-devel on Windows
+    1) Check with R-devel on Ubuntu (this currently takes ~24 hours to return
+    the results; skip it if you're in a hurry)
+
+        ```
+        rhub::check_for_cran(platform = "ubuntu-gcc-devel")
+        ```
+
+    1) Check with R-devel on Windows
 
         ```
         rhub::check_for_cran(platform = "windows-x86_64-devel")
@@ -92,3 +99,16 @@ urlchecker::url_check()
 1. Update `cran-comments.md`
 
 1. [Submit tarball to CRAN](https://cran.r-project.org/submit.html)
+
+    ```
+    R CMD build .
+    ```
+
+1. After acceptance, tag and create a release on GitHub
+
+    ```
+    git tag -a vX.X.X
+    git push origin --tags
+    ```
+
+1. Bump to a development version: X.X.X.X

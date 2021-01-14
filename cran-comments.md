@@ -10,6 +10,7 @@ This is a resubmission. In this version I have:
 
 * R-hub
     * solaris-x86-patched
+    * ubuntu-gcc-devel
     * windows-x86_64-devel
 
 * GitHub Actions (release)

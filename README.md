@@ -3,6 +3,8 @@
 
 # faviconPlease
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/faviconPlease)](https://cran.r-project.org/package=faviconPlease)
 [![R-CMD-check](https://github.com/jdblischak/faviconPlease/workflows/R-CMD-check/badge.svg)](https://github.com/jdblischak/faviconPlease/actions)
 
 Finds the URL to the ‘favicon’ for a website. This is useful if you want
