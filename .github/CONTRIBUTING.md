@@ -24,13 +24,13 @@ roxygen2::roxygenize('.', roclets = c('rd', 'collate', 'namespace'))
 ## Run the tests
 
 The tests use the [tinytest](https://cran.r-project.org/package=tinytest)
-framework. The test files are in `/inst/tinytest/`.
+framework. The test files are in `inst/tinytest/`.
 
 ```
 # Run all tests
 tinytest::test_all()
 # Run a specific test file
-tinytest::run_test_file("/inst/tinytest/<testfile>.R")
+tinytest::run_test_file("inst/tinytest/<testfile>.R")
 ```
 
 ## Build and check the package

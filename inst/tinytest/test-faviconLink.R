@@ -130,12 +130,12 @@ if (at_home()) {
   # Another example with <base>
   expect_identical(
     faviconLink("https", "www.targetvalidation.org", "/target/"),
-    "https://www.targetvalidation.org/imgs/favicons/OT_favicon.png"
+    "https://www.targetvalidation.org/favicon.png"
   )
 
   expect_identical(
     faviconPlease("https://www.targetvalidation.org/target/"),
-    "https://www.targetvalidation.org/imgs/favicons/OT_favicon.png"
+    "https://www.targetvalidation.org/favicon.png"
   )
 
   # Example of multiple rel="icon" (multiple sizes). The first one is always
