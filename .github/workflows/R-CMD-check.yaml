@@ -17,14 +17,14 @@ jobs:
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
 
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    name: ${{ matrix.config.os }}
 
     strategy:
       fail-fast: false
       matrix:
         config:
           - {os: windows-latest}
-          - {os: macOS-latest}
+          - {os: macos-10.15}
           - {os: ubuntu-20.04, rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
 
     env:
@@ -83,5 +83,5 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@main
         with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
+          name: ${{ runner.os }}-results
           path: check
