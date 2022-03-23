@@ -79,9 +79,11 @@ favicon service, e.g. https://www.google.com/s2/favicons?domain_url=www.ensembl.
 you can set the argument `fallback = faviconGoogle`.
 
 Note that neither DuckDuckGo nor Google have every favicon you might expect.
+And the availability can change over time.
 Some examples:
 
-* DuckDuckGo has the favicon for GitHub but not Google
+* DuckDuckGo has the favicon for GitHub. Google used to not have it at all, and
+  currently they have a grainy version
     * https://icons.duckduckgo.com/ip3/github.com.ico
     <img
       src="https://icons.duckduckgo.com/ip3/github.com.ico"
