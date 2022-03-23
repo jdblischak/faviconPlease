@@ -206,8 +206,8 @@ faviconIco <- function(
 #'
 #' The search engine \href{https://duckduckgo.com/}{DuckDuckGo} includes site
 #' favicons in its search results, and it makes this service publicly available.
-#' If it can't a favicon, it returns a default fallback. faviconPlease uses this
-#' as a fallback function if the favicon can't be found directly via the
+#' If it can't find a favicon, it returns a default fallback. faviconPlease uses
+#' this as a fallback function if the favicon can't be found directly via the
 #' standard methods.
 #'
 #' @inheritParams faviconLink
@@ -218,8 +218,7 @@ faviconIco <- function(
 #'   faviconDuckDuckGo("reactome.org")
 #'
 #' @references
-#'   \href{https://help.duckduckgo.com/duckduckgo-help-pages/features/favicons/}{DuckDuckGo favicons},
-#'   \href{https://help.duckduckgo.com/duckduckgo-help-pages/privacy/favicons/}{DuckDuckGo favicons privacy}
+#'   \href{https://help.duckduckgo.com/privacy/favicons/}{DuckDuckGo favicons privacy}
 #'
 #'#' @seealso \code{\link{faviconPlease}},
 #'          \code{\link{faviconGoogle}}
