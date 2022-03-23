@@ -7,14 +7,38 @@ using("ttdo")
 #     https://useast.ensembl.org. By default method="libcurl",
 #     getOption("download.file.method"), uses -L to follow redirects, so I don't
 #     know what the exact problem is.
-#   * It has a rel="icon" link in addition to /favicon.ico, and it points to a
-#     a different path: /i/ensembl-favicon.png
+#   * It has a rel="icon" link in addition to /favicon.ico, and it points to a a
+#     different path on a different subdomain: //static.ensembl.org/i/ensembl-favicon.png
+#   * The useast mirror defines the icon at a different root-relative URL:
+#     /i/ensembl-favicon.png
 #   * The links in its head element are duplicated
 
 if (at_home()) {
+
+  # https://useast.ensembl.org/
+  #
+  # <link type="image/png" href="/i/ensembl-favicon.png" rel="icon" />
+  expect_identical_xl(
+    faviconLink("https", "useast.ensembl.org", "/Homo_sapiens/Gene/Summary"),
+    "https://useast.ensembl.org/i/ensembl-favicon.png"
+  )
+
+  expect_identical_xl(
+    faviconPlease("https://useast.ensembl.org/Homo_sapiens/Gene/Summary?g="),
+    "https://useast.ensembl.org/i/ensembl-favicon.png"
+  )
+
+  # https://www.ensembl.org/?redirect=no
+  #
+  # <link type="image/png" rel="icon" href="//static.ensembl.org/i/ensembl-favicon.png" />
   expect_identical_xl(
     faviconLink("https", "ensembl.org", "/Homo_sapiens/Gene/Summary"),
-    "https://ensembl.org/i/ensembl-favicon.png"
+    "https://static.ensembl.org/i/ensembl-favicon.png"
+  )
+
+  expect_identical_xl(
+    faviconPlease("https://ensembl.org/Homo_sapiens/Gene/Summary?g="),
+    "https://static.ensembl.org/i/ensembl-favicon.png"
   )
 
   # So far I could only get the favicon.ico with utils::download.file() with
@@ -57,11 +81,6 @@ if (at_home()) {
   } else {
     message("wget is not available")
   }
-
-  expect_identical_xl(
-    faviconPlease("https://ensembl.org/Homo_sapiens/Gene/Summary?g="),
-    "https://ensembl.org/i/ensembl-favicon.png"
-  )
 }
 
 # uniprot.org is also owned by EBI, so it suffers from the same complications
