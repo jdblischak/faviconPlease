@@ -65,7 +65,7 @@ invalid domain (I can't provide an example because CRAN flags invalid
 URLs when checking a package).
 
 [ddg]: https://duckduckgo.com/
-[ddg-icon]: https://help.duckduckgo.com/duckduckgo-help-pages/features/favicons/
+[ddg-icon]: https://help.duckduckgo.com/privacy/favicons/
 
 ## Extending faviconPlease
 
