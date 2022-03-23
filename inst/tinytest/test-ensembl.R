@@ -11,6 +11,12 @@ using("ttdo")
 #     different path on a different subdomain: //static.ensembl.org/i/ensembl-favicon.png
 #   * The useast mirror defines the icon at a different root-relative URL:
 #     /i/ensembl-favicon.png
+#   * Confusingly, even though the HTML clearly shows the link to the
+#     static.ensembl.org URL, this is only returned by xml2::read_html() on my
+#     personal Windows. Both GitHub Actions (all 3 OS) and my work Windows return
+#     the original URL (which again, is no longer visible). My guess is that they
+#     update the returned HTML based on the agent (e.g. it's different if it's a web
+#     browser)
 
 if (at_home()) {
 
@@ -30,14 +36,17 @@ if (at_home()) {
   # https://www.ensembl.org/?redirect=no
   #
   # <link type="image/png" rel="icon" href="//static.ensembl.org/i/ensembl-favicon.png" />
+  #
+  # I don't know why it usually returns https://ensembl.org/i/ensembl-favicon.png
+  # even though it's different when looking in a web browser
   expect_identical_xl(
     faviconLink("https", "ensembl.org", "/Homo_sapiens/Gene/Summary"),
-    "https://static.ensembl.org/i/ensembl-favicon.png"
+    "https://ensembl.org/i/ensembl-favicon.png"
   )
 
   expect_identical_xl(
     faviconPlease("https://ensembl.org/Homo_sapiens/Gene/Summary?g="),
-    "https://static.ensembl.org/i/ensembl-favicon.png"
+    "https://ensembl.org/i/ensembl-favicon.png"
   )
 
   # So far I could only get the favicon.ico with utils::download.file() with
