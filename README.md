@@ -60,14 +60,14 @@ returns it.
     this URL is returned.
 
 4.  If the above steps fail, as a fallback, use the [favicon
-    service](https://help.duckduckgo.com/duckduckgo-help-pages/features/favicons/)
-    provided by the search engine [DuckDuckGo](https://duckduckgo.com/),
-    e.g. <https://icons.duckduckgo.com/ip3/github.com.ico>. This
-    provides a nice default for websites that don’t have a favicon (or
-    can’t be easily found). You can view the generic favicon by
-    replacing `github.com` in the previous URL with an invalid domain (I
-    can’t provide an example because CRAN flags invalid URLs when
-    checking a package).
+    service](https://help.duckduckgo.com/privacy/favicons/) provided by
+    the search engine [DuckDuckGo](https://duckduckgo.com/), e.g.
+    <https://icons.duckduckgo.com/ip3/github.com.ico>. This provides a
+    nice default for websites that don’t have a favicon (or can’t be
+    easily found). You can view the generic favicon by replacing
+    `github.com` in the previous URL with an invalid domain (I can’t
+    provide an example because CRAN flags invalid URLs when checking a
+    package).
 
 ## Extending faviconPlease
 
@@ -82,28 +82,29 @@ e.g. <https://www.google.com/s2/favicons?domain_url=www.ensembl.org>,
 you can set the argument `fallback = faviconGoogle`.
 
 Note that neither DuckDuckGo nor Google have every favicon you might
-expect. Some examples:
+expect. And the availability can change over time. Some examples:
 
-  - DuckDuckGo has the favicon for GitHub but not Google
-      - <https://icons.duckduckgo.com/ip3/github.com.ico> <img
+-   DuckDuckGo has the favicon for GitHub. Google used to not have it at
+    all, and currently they have a grainy version
+    -   <https://icons.duckduckgo.com/ip3/github.com.ico> <img
         src="https://icons.duckduckgo.com/ip3/github.com.ico"
         alt="GitHub's favicon from DuckDuckGo"
         height="20px"
           />
-      - <https://www.google.com/s2/favicons?domain_url=github.com> <img
+    -   <https://www.google.com/s2/favicons?domain_url=github.com> <img
         src="https://www.google.com/s2/favicons?domain_url=github.com"
         alt="GitHub's favicon from Google"
         height="20px"
           />
-  - Google has the favicon for [AmiGO](http://amigo.geneontology.org/)
+-   Google has the favicon for [AmiGO](http://amigo.geneontology.org/)
     but not DuckDuckGo
-      - <https://www.google.com/s2/favicons?domain_url=amigo.geneontology.org>
+    -   <https://www.google.com/s2/favicons?domain_url=amigo.geneontology.org>
         <img
         src="https://www.google.com/s2/favicons?domain_url=geneontology.org"
         alt="AmiGO's favicon from Google"
         height="20px"
           />
-      - I can’t display the generic favicon returned by DuckDuckGo,
+    -   I can’t display the generic favicon returned by DuckDuckGo,
         again because of CRAN’s URL checks.
 
 Fortunately they both provide a generic favicon to insert when they
@@ -193,8 +194,8 @@ faviconIcoUbuntu20 <- function(scheme, server, path) {
 It calls `faviconIco()` with the specific settings needed by
 `download.file()` to work on Ubuntu 20.04. You could then use your
 custom function instead of the default `faviconIco()` by calling
-`faviconPlease()` with `functions = list(faviconLink,
-faviconIcoUbuntu20)`.
+`faviconPlease()` with
+`functions = list(faviconLink, faviconIcoUbuntu20)`.
 
 Note that the example function `faviconIcoUbuntu20()` will likely fail
 on Windows, macOS, and Ubuntu versions prior to 20.04.
@@ -207,9 +208,9 @@ systems and all websites. Here are some known issues:
 1.  `download.file()`, used by `faviconIco()`, is known to have
     cross-platform issues. Thus the official documentation in
     `?download.file` recommends:
-    
+
     > Setting the `method` should be left to the end user.
-    
+
     Accordingly, `faviconIco()` exposes the arguments `method`, `extra`,
     and `headers`, which are passed directly to `download.file()`.
     Alternatively you can set the global options
@@ -223,13 +224,13 @@ systems and all websites. Here are some known issues:
     has a workaround for this situation, but not `faviconIco()`. As an
     example, here’s how you could detect the availability of favicon.ico
     for the Ensembl website on Ubuntu 20.
-    
+
     ``` r
     faviconIco("https", "www.ensembl.org", "",
                method = "wget", extra = c("--no-check-certificate",
                                               "--ciphers=DEFAULT:@SECLEVEL=1"))
     ```
-    
+
     Alternatively, if it’s an option for you, you could avoid this
     workaround by using the previous Ubuntu LTS release 18.04. Also note
     that the above command will fail on Ubuntu 18.04 because the default
