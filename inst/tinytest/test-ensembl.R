@@ -11,7 +11,6 @@ using("ttdo")
 #     different path on a different subdomain: //static.ensembl.org/i/ensembl-favicon.png
 #   * The useast mirror defines the icon at a different root-relative URL:
 #     /i/ensembl-favicon.png
-#   * The links in its head element are duplicated
 
 if (at_home()) {
 
