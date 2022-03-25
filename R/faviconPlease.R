@@ -220,7 +220,7 @@ faviconIco <- function(
 #' @references
 #'   \href{https://help.duckduckgo.com/privacy/favicons/}{DuckDuckGo favicons privacy}
 #'
-#'#' @seealso \code{\link{faviconPlease}},
+#' @seealso \code{\link{faviconPlease}},
 #'          \code{\link{faviconGoogle}}
 #'
 #' @export
