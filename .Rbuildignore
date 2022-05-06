@@ -2,6 +2,7 @@
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^README\.Rmd$
+^README\.html$
 ^\.github$
 ^cran-comments\.md$
 ^.*\.tar\.gz$
