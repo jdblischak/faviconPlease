@@ -14,13 +14,17 @@ if (!at_home()) exit_file("Only test ensembl \"at_home\"")
 # <link type="image/png" href="/i/ensembl-favicon.png" rel="icon" />
 
 expect_identical_xl(
-  faviconLink("https", "useast.ensembl.org", "/Homo_sapiens/Gene/Summary"),
-  "https://useast.ensembl.org/i/ensembl-favicon.png"
+  basename(
+    faviconLink("https", "useast.ensembl.org", "/Homo_sapiens/Gene/Summary")
+  ),
+  "ensembl-favicon.png"
 )
 
 expect_identical_xl(
-  faviconPlease("https://useast.ensembl.org/Homo_sapiens/Gene/Summary?g="),
-  "https://useast.ensembl.org/i/ensembl-favicon.png"
+  basename(
+    faviconPlease("https://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=")
+  ),
+  "ensembl-favicon.png"
 )
 
 # www.ensembl.org --------------------------------------------------------------
@@ -29,27 +33,24 @@ expect_identical_xl(
 #
 # <link type="image/png" rel="icon" href="//static.ensembl.org/i/ensembl-favicon.png" />
 
-
 # The browser clearly shows the URL "//static.ensembl.org/i/ensembl-favicon.png".
 # And this works on my personal laptop. But on GitHub Actions and my work
 # laptop, it somehow returns "/i/ensembl-favicon.png". I haven't been able to
 # figure out the source of the discrepancy, and at the end of the day, it
 # doesn't matter as long as it returns a valid favicon path
 
-expect_true_xl(
-  faviconLink("https", "ensembl.org", "/Homo_sapiens/Gene/Summary") %in%
-    c(
-      "https://static.ensembl.org/i/ensembl-favicon.png",
-      "https://ensembl.org/i/ensembl-favicon.png"
-    )
+expect_identical_xl(
+  basename(
+    faviconLink("https", "ensembl.org", "/Homo_sapiens/Gene/Summary")
+  ),
+  "ensembl-favicon.png"
 )
 
-expect_true_xl(
-  faviconPlease("https://ensembl.org/Homo_sapiens/Gene/Summary?g=") %in%
-    c(
-      "https://static.ensembl.org/i/ensembl-favicon.png",
-      "https://ensembl.org/i/ensembl-favicon.png"
-    )
+expect_identical_xl(
+  basename(
+    faviconPlease("https://ensembl.org/Homo_sapiens/Gene/Summary?g=")
+  ),
+  "ensembl-favicon.png"
 )
 
 # So far I could only get the favicon.ico with utils::download.file() with
