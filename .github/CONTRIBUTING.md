@@ -75,8 +75,7 @@ urlchecker::url_check()
         rhub::check_for_cran(platform = "solaris-x86-patched")
         ```
 
-    1) Check with R-devel on Ubuntu (this currently takes ~24 hours to return
-    the results; skip it if you're in a hurry)
+    1) Check with R-devel on Ubuntu
 
         ```
         rhub::check_for_cran(platform = "ubuntu-gcc-devel")

@@ -1,4 +1,4 @@
-### Development version (GitHub)
+### 0.1.2
 
 * Remove problematic URLs and link to blog post
 * Update tests for ensembl.org
