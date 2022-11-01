@@ -32,7 +32,7 @@ jobs:
         with:
           install-r: false
       - uses: r-lib/actions/setup-pandoc@v2
-      - uses: r-lib/actions/setup-r-dependencies@v2
+      - uses: r-lib/actions/setup-r-dependencies@v2-branch
         with:
           cache-version: ${{ matrix.config.os }}-1
           extra-packages: any::rcmdcheck
