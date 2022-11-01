@@ -34,4 +34,5 @@ jobs:
       - uses: r-lib/actions/check-r-package@v2
       - name: Test results
         if: always()
-        run: cat check/tests/tinytest.Rout*
+        run: cat check/faviconPlease.Rcheck/tests/tinytest.Rout*
+        shell: bash {0}
