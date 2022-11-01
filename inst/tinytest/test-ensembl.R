@@ -104,7 +104,7 @@ if (Sys.which("wget") != "") {
 # <link type="image/vnd.microsoft.icon" href="/favicon.ico" rel="shortcut icon"/>
 expect_identical_xl(
   faviconLink("https", "www.uniprot.org", "/uniprot/"),
-  "https://www.uniprot.org/favicon-32x32.png"
+  "https://www.uniprot.org/mstile-144x144.png"
 )
 
 # So far I could only get the favicon.ico with utils::download.file() with
@@ -135,5 +135,5 @@ if (Sys.which("wget") != "") {
 
 expect_identical_xl(
   faviconPlease("https://www.uniprot.org/uniprot/"),
-  "https://www.uniprot.org/favicon-32x32.png"
+  "https://www.uniprot.org/mstile-144x144.png"
 )
