@@ -226,7 +226,7 @@ faviconIco <- function(
 #'   faviconDuckDuckGo("reactome.org")
 #'
 #' @references
-#'   \href{https://help.duckduckgo.com/privacy/favicons/}{DuckDuckGo favicons privacy}
+#'   \href{https://duckduckgo.com/duckduckgo-help-pages/privacy/favicons/}{DuckDuckGo favicons privacy}
 #'
 #' @seealso \code{\link{faviconPlease}},
 #'          \code{\link{faviconGoogle}}

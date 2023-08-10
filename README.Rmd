@@ -66,7 +66,7 @@ provided by the search engine [DuckDuckGo][ddg]. This provides a nice default
 for websites that don't have a favicon (or can't be easily found).
 
 [ddg]: https://duckduckgo.com/
-[ddg-icon]: https://help.duckduckgo.com/privacy/favicons/
+[ddg-icon]: https://duckduckgo.com/duckduckgo-help-pages/privacy/favicons/
 
 ## Extending faviconPlease
 

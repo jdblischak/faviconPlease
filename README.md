@@ -64,10 +64,10 @@ returns it.
     this URL is returned.
 
 4.  If the above steps fail, as a fallback, use the [favicon
-    service](https://help.duckduckgo.com/privacy/favicons/) provided by
-    the search engine [DuckDuckGo](https://duckduckgo.com/). This
-    provides a nice default for websites that don’t have a favicon (or
-    can’t be easily found).
+    service](https://duckduckgo.com/duckduckgo-help-pages/privacy/favicons/)
+    provided by the search engine [DuckDuckGo](https://duckduckgo.com/).
+    This provides a nice default for websites that don’t have a favicon
+    (or can’t be easily found).
 
 ## Extending faviconPlease
 
