@@ -1,6 +1,6 @@
 Package: faviconPlease
 Title: Find the URL to the 'Favicon' for a Website
-Version: 0.1.2.4
+Version: 0.1.2.5
 Authors@R:
     person(given = "John",
            family = "Blischak",

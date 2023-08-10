@@ -144,13 +144,21 @@ readHtml <- function(theUrl) {
   # If the suggested package httr is installed, try downloading the file without
   # authenticating the SSL certificate
   if (requireNamespace("httr", quietly = TRUE)) {
+    os <- Sys.info()["sysname"]
+    if (os == "Linux") {
+      curlOpts <- httr::config(
+        ssl_verifypeer = 0L,
+        ssl_cipher_list = "DEFAULT@SECLEVEL=1"
+      )
+    } else {
+      curlOpts <- httr::config(
+        ssl_verifypeer = 0L
+      )
+    }
     theUrlDownloaded <- httr::RETRY(
       verb = "GET",
       url = theUrl,
-      config = httr::config(
-        ssl_verifypeer = 0L,
-        ssl_cipher_list = "DEFAULT@SECLEVEL=1"
-      ),
+      config = curlOpts,
       quiet = TRUE
     )
     if (!httr::http_error(theUrlDownloaded)) {
