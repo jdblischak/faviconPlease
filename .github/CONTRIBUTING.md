@@ -69,12 +69,6 @@ urlchecker::url_check()
         rhub::validate_email()
         ```
 
-    1) Check with R-release on Solaris
-
-        ```
-        rhub::check_for_cran(platform = "solaris-x86-patched")
-        ```
-
     1) Check with R-devel on Ubuntu
 
         ```

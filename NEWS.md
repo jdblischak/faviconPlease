@@ -1,4 +1,4 @@
-### Development version (GitHub)
+### 0.1.3
 
 * Only define the curl option `ssl_cipher_list = "DEFAULT@SECLEVEL=1"` on Linux.
   It's original purpose was to get around the increased security level on Ubuntu
