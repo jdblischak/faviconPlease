@@ -1,6 +1,6 @@
 ### Development version (GitHub)
 
-* Update tests for uniprot.org
+* Update tests for uniprot.org and amigo.geneontology.org
 
 ### 0.1.2
 
