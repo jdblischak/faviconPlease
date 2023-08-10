@@ -100,6 +100,7 @@ urlchecker::url_check()
 1. After acceptance, tag and create a release on GitHub
 
     ```
+    git tag -l -n9
     git tag -a vX.X.X
     git push origin --tags
     ```
