@@ -61,7 +61,7 @@ if (Sys.which("wget") != "") {
   # --ciphers isn't available for the version of wget on Ubuntu 18.04
   # (bionic).
   # https://stackoverflow.com/a/62359497
-  if (startsWith(os, "Ubuntu 20")) {
+  if (isTRUE(startsWith(os, "Ubuntu 20"))) {
     # apex domain
     expect_identical_xl(
       faviconIco("https", "ensembl.org", "/Homo_sapiens/Gene/Summary",
@@ -115,7 +115,7 @@ if (Sys.which("wget") != "") {
   # --ciphers isn't available for the version of wget on Ubuntu 18.04
   # (bionic).
   # https://stackoverflow.com/a/62359497
-  if (startsWith(os, "Ubuntu 20")) {
+  if (isTRUE(startsWith(os, "Ubuntu 20"))) {
     expect_identical_xl(
       faviconIco("https", "www.uniprot.org", "/uniprot/",
                  method = "wget", extra = c("--no-check-certificate",
