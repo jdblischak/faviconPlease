@@ -1,4 +1,6 @@
-### Development version (GitHub)
+### 0.1.4
+
+* Minor maintenance release
 
 ### 0.1.3
 
