@@ -18,7 +18,8 @@ forward slash)}
 URL to favicon or \code{""}.
 }
 \description{
-Search for a link element that specifies the location of the favicon
+Uses a default timeout of 2 seconds. You can modify this with the package
+option \code{FAVICONPLEASE_TIMEOUT_SECONDS}.
 }
 \seealso{
 \code{\link{faviconPlease}},

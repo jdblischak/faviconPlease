@@ -31,6 +31,8 @@ framework. The test files are in `inst/tinytest/`.
 tinytest::test_all()
 # Run a specific test file
 tinytest::run_test_file("inst/tinytest/<testfile>.R")
+# Skip tests that access the internet
+tinytest::test_all(at_home = FALSE)
 ```
 
 ## Build and check the package

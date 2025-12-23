@@ -72,6 +72,9 @@ faviconPlease <- function(
 
 #' Search for a link element that specifies the location of the favicon
 #'
+#' Uses a default timeout of 2 seconds. You can modify this with the package
+#' option \code{FAVICONPLEASE_TIMEOUT_SECONDS}.
+#'
 #' @param scheme "http" or "https"
 #' @param server The name of the server, e.g. "www.r-project.org"
 #' @param path The path to a target file on the server (must start with a
@@ -155,10 +158,22 @@ readHtml <- function(theUrl) {
         ssl_verifypeer = 0L
       )
     }
+    timeoutSecs <- getOption("FAVICONPLEASE_TIMEOUT_SECONDS", default = 2L)
+    if (!is.integer(timeoutSecs)) {
+      timeoutErrorMsg <- c(
+        "The {faviconPlease} package option FAVICONPLEASE_TIMEOUT_SECONDS must be an integer.\n",
+        "Remember to add the suffix L to convert a number to an integer.\n",
+        "For example, in your script or .Rprofile:\n\n",
+        "options(FAVICONPLEASE_TIMEOUT_SECONDS = 3L) # increase timeout\n",
+        "options(FAVICONPLEASE_TIMEOUT_SECONDS = 0L) # remove timeout (wait indefinitely)\n"
+      )
+      stop(timeoutErrorMsg)
+    }
     theUrlDownloaded <- httr::RETRY(
       verb = "GET",
       url = theUrl,
       config = curlOpts,
+      httr::timeout(timeoutSecs),
       quiet = TRUE
     )
     if (!httr::http_error(theUrlDownloaded)) {
