@@ -61,31 +61,6 @@ urlchecker::url_check()
 
 1. Update `NEWS.md`
 
-1. Check package with [R-hub v2][rhubv2]
-
-    [rhubv2]: https://r-hub.github.io/rhub/articles/rhubv2.html
-
-
-    1) Setup local machine. You need a [GitHub PAT][github-pat]
-
-        ```R
-        rhub::rhub_doctor()
-        ```
-
-        [github-pat]: https://gitcreds.r-lib.org/reference/gitcreds_get.html
-
-    1) Check with R-devel on Ubuntu
-
-        ```R
-        rhub::rhub_check(platforms = "r-devel-linux-x86_64-debian-gcc")
-        ```
-
-    1) Check with R-devel on Windows
-
-        ```R
-        rhub::rhub_check(platforms = "r-devel-windows-x86_64")
-        ```
-
 1. Check package with R-devel on [win-builder][]
 
     ```R
