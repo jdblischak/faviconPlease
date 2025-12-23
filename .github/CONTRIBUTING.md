@@ -94,8 +94,6 @@ urlchecker::url_check()
 
     [win-builder]: https://win-builder.r-project.org/
 
-1. Update `cran-comments.md`
-
 1. [Submit tarball to CRAN](https://cran.r-project.org/submit.html)
 
     ```sh

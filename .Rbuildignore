@@ -4,5 +4,4 @@
 ^README\.Rmd$
 ^README\.html$
 ^\.github$
-^cran-comments\.md$
 ^.*\.tar\.gz$
