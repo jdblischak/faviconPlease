@@ -3,6 +3,13 @@ on:
   push:
     branches:
       - main
+    paths:
+      - '.Rbuildignore'
+      - 'DESCRIPTION'
+      - '.github/workflows/R-CMD-check.yaml'
+      - 'inst/tinytest/**'
+      - 'R/**'
+      - 'tests/**'
   pull_request:
     branches:
       - main
