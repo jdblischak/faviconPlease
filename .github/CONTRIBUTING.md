@@ -5,7 +5,7 @@
 Install the following development-only dependencies:
 
 ```R
-install.packages(c("devtools", "remotes", "rhub", "rmarkdown", "roxygen2"))
+install.packages(c("devtools", "remotes", "rmarkdown", "roxygen2"))
 ```
 
 And then install the required and suggested dependencies:

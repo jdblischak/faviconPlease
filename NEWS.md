@@ -1,4 +1,4 @@
-### Development version (GitHub)
+### 0.2.0
 
 * Add a default timeout of 2 seconds when attempting to access a page via {httr}
   (done by `faviconLink()` if {httr} is installed). This can be modified by the
